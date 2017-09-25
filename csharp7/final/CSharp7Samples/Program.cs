@@ -229,4 +229,46 @@ class Program
             }
         }
     }
+
+    static void GroupJoin()
+    {
+        var racers = from cs in Formula1.GetChampionships()
+                     from r in new List<(int Year, int Position, string FirstName, string LastName)>()
+                     {
+                         (cs.Year, Position: 1, FirstName: cs.First.FirstName(), LastName: cs.First.LastName()),
+                         (cs.Year, Position: 2, FirstName: cs.Second.FirstName(), LastName: cs.Second.LastName()),
+                         (cs.Year, Position: 3, FirstName: cs.Third.FirstName(), LastName: cs.Third.LastName())
+                     }
+                     select r;
+
+        var q = (from r in Formula1.GetChampions()
+                 join r2 in racers on
+                 (
+                     r.FirstName,
+                     r.LastName
+                 )
+                 equals
+                 (
+                     r2.FirstName,
+                     r2.LastName
+                 )
+                 into yearResults
+                 select
+                 (
+                     r.FirstName,
+                     r.LastName,
+                     r.Wins,
+                     r.Starts,
+                     Results: yearResults
+                 ));
+
+        foreach (var r in q)
+        {
+            Console.WriteLine($"{r.FirstName} {r.LastName}");
+            foreach (var results in r.Results)
+            {
+                Console.WriteLine($"\t{results.Year} {results.Position}");
+            }
+        }
+    }
 }
