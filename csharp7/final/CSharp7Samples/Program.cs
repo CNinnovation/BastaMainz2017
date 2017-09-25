@@ -1,5 +1,7 @@
 ﻿using CSharp7Samples;
+using DataLib;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 class Program
@@ -14,6 +16,7 @@ class Program
         ThrowExpressions();
         PatternMatching();
         TuplesAndDeconstruction();
+        GroupJoinWithMethodsAndTuples();
     }
 
     private static void BinaryLiteralsAndDigitSeparators()
@@ -115,7 +118,7 @@ class Program
         Console.WriteLine(s);
 
         var t = Divide(7, 3);
-        Console.WriteLine($"result: {t.Result}, reminder: {t.Reminder}");
+        Console.WriteLine($"result: {t.Result}, reminder: {t.Remainder}");
 
         var oldtuple = t.ToTuple();
         Console.WriteLine($"result: {oldtuple.Item1}, reminder: {oldtuple.Item2}");
@@ -197,6 +200,33 @@ class Program
                 break;
             default:
                 break;
+        }
+    }
+
+    static void GroupJoinWithMethodsAndTuples()
+    {
+        var racers = Formula1.GetChampionships()
+          .SelectMany(cs => new List<(int Year, int Position, string FirstName, string LastName)>
+          {
+              (cs.Year, Position: 1, FirstName: cs.First.FirstName(), LastName: cs.First.LastName()),
+              (cs.Year, Position: 2, FirstName: cs.Second.FirstName(), LastName: cs.Second.LastName()),
+              (cs.Year, Position: 3, FirstName: cs.Third.FirstName(), LastName: cs.Third.LastName())
+          });
+
+        var q = Formula1.GetChampions()
+            .GroupJoin(racers,
+                r1 => (r1.FirstName, r1.LastName),
+                r2 => (r2.FirstName, r2.LastName),
+                (r1, r2s) => (r1.FirstName, r1.LastName, r1.Wins, r1.Starts, Results: r2s));
+
+
+        foreach (var r in q)
+        {
+            Console.WriteLine($"{r.FirstName} {r.LastName}");
+            foreach (var results in r.Results)
+            {
+                Console.WriteLine($"{results.Year} {results.Position}");
+            }
         }
     }
 }
