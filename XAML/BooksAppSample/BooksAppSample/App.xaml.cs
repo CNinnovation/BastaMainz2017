@@ -1,4 +1,5 @@
-﻿using BooksServices.Services;
+﻿using BooksAppSample.WPFServices;
+using BooksServices.Services;
 using BooksServices.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -26,6 +27,7 @@ namespace BooksAppSample
             services.AddTransient<BooksMasterDetailViewModel>();
             services.AddSingleton<IEventAggregator, EventAggregator>();
             services.AddSingleton<ILoggerFactory, LoggerFactory>();
+            services.AddSingleton<IDialogService, WPFDialogService>();
             Container = services.BuildServiceProvider();
         }
 

@@ -15,21 +15,23 @@ namespace BooksServices.ViewModels
     {
         private readonly IBooksService _booksService;
         private readonly IEventAggregator _eventAggregator;
+        private readonly IDialogService _dialogService;
 
-        public BooksMasterDetailViewModel(ILoggerFactory loggerFactory, IBooksService booksService, IEventAggregator eventAggregator)
+        public BooksMasterDetailViewModel(ILoggerFactory loggerFactory, IBooksService booksService, IEventAggregator eventAggregator, IDialogService dialogService)
             : base(loggerFactory)
         {
             _booksService = booksService;
             _eventAggregator = eventAggregator;
+            _dialogService = dialogService;
             _eventAggregator.GetEvent<RefreshBooksEvent>().Subscribe(() =>
             {
                 OnRefresh();
             });
             InitBooks();
 
-            TestCommand = new RelayCommand(() =>
+            TestCommand = new RelayCommand(async () =>
             {
-                this.Items.First().Item.Title = "updated";
+                await _dialogService.ShowMessageAsync("Hello from the View-Model");                
             });
         }
 
