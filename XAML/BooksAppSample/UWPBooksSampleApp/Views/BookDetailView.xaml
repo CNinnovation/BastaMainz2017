@@ -1,0 +1,41 @@
+﻿<UserControl
+    x:Class="UWPBooksSampleApp.Views.BookDetailView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPBooksSampleApp.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ProgressBar Grid.ColumnSpan="2" Height="10" Margin="4" Visibility="{x:Bind ViewModel.SelectedItem.InProgress, Mode=OneWay}" 
+                     IsEnabled="{x:Bind ViewModel.SelectedItem.InProgress, Mode=OneWay}"
+                     IsIndeterminate="True"  />
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <AppBarButton Icon="Edit" Content="Edit" Command="{x:Bind ViewModel.SelectedItem.EditModeCommand, Mode=OneWay}" />
+            <AppBarButton Icon="Cancel"  Content="Cancel" Command="{x:Bind ViewModel.SelectedItem.CancelCommand, Mode=OneWay}" />
+            <AppBarButton Icon="Save" Command="{x:Bind ViewModel.SelectedItem.SaveCommand, Mode=OneWay}" />
+        </StackPanel>
+        <TextBox Grid.Row="2" 
+                 Header="Title"
+                 Text="{x:Bind ViewModel.SelectedItem.Item.Title, Mode=TwoWay}" 
+                 IsEnabled="{x:Bind ViewModel.SelectedItem.IsEditMode, Mode=OneWay}" />
+
+        <TextBox Grid.Row="3"
+                 Header="Publisher"
+                 Text="{x:Bind ViewModel.SelectedItem.Item.Publisher, Mode=TwoWay}" 
+                 IsEnabled="{x:Bind ViewModel.SelectedItem.IsEditMode, Mode=OneWay}" />
+
+    </Grid>
+</UserControl>
