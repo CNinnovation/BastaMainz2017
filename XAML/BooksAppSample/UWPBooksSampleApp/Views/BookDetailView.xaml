@@ -8,7 +8,6 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -21,7 +20,7 @@
         </Grid.ColumnDefinitions>
         <ProgressBar Grid.ColumnSpan="2" Height="10" Margin="4" Visibility="{x:Bind ViewModel.SelectedItem.InProgress, Mode=OneWay}" 
                      IsEnabled="{x:Bind ViewModel.SelectedItem.InProgress, Mode=OneWay}"
-                     IsIndeterminate="True"  />
+                     IsIndeterminate="True" />
         <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
             <AppBarButton Icon="Edit" Content="Edit" Command="{x:Bind ViewModel.SelectedItem.EditModeCommand, Mode=OneWay}" />
             <AppBarButton Icon="Cancel"  Content="Cancel" Command="{x:Bind ViewModel.SelectedItem.CancelCommand, Mode=OneWay}" />

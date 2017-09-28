@@ -17,7 +17,8 @@
                 <DataTemplate x:DataType="vm:BookViewModel">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{x:Bind Item.Title, Mode=OneWay}" />
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Visibility="{x:Bind IsSelected, Mode=OneWay}">
+                            <AppBarButton Icon="Edit" Label="Edit" Command="{x:Bind EditModeCommand, Mode=OneTime}" />
                             <AppBarButton Icon="Delete" Label="Delete" Command="{x:Bind DeleteCommand, Mode=OneTime}" />
                         </StackPanel>
                     </StackPanel>

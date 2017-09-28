@@ -4,8 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:BooksAppSample.Views"
+             xmlns:conv="clr-namespace:BooksAppSample.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid>
         <ListView ItemsSource="{Binding ViewModel.Items, Mode=OneWay}" 
                   SelectedItem="{Binding ViewModel.SelectedItem, Mode=TwoWay}">
@@ -13,7 +17,8 @@
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{Binding Item.Title, Mode=OneWay}" />
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Visibility="{Binding IsSelected, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <Button Content="Edit" Command="{Binding EditModeCommand, Mode=OneTime}" />
                             <Button Content="Delete" Command="{Binding DeleteCommand, Mode=OneTime}" />
                         </StackPanel>
                     </StackPanel>
