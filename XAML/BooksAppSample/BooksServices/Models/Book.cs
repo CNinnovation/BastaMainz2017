@@ -1,7 +1,4 @@
 ﻿using CNElements.MVVM.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BooksServices.Models
 {
@@ -16,7 +13,6 @@ namespace BooksServices.Models
         public int BookId { get; }
 
         private string _title;
-
         public string Title
         {
             get => _title;
@@ -24,7 +20,6 @@ namespace BooksServices.Models
         }
 
         private string _publisher;
-
         public string Publisher
         {
             get => _publisher;
@@ -32,6 +27,5 @@ namespace BooksServices.Models
         }
 
         public override string ToString() => Title;
-
     }
 }

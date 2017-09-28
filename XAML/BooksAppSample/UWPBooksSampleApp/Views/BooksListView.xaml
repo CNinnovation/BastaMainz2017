@@ -18,7 +18,7 @@
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="{x:Bind Item.Title, Mode=OneWay}" />
                         <StackPanel Orientation="Horizontal">
-                            <Button Content="Delete" Command="{x:Bind DeleteCommand, Mode=OneTime}" />
+                            <AppBarButton Icon="Delete" Label="Delete" Command="{x:Bind DeleteCommand, Mode=OneTime}" />
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>

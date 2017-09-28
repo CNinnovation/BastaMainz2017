@@ -4,8 +4,6 @@ using BooksServices.Services;
 using CNElements.MVVM.ViewModels;
 using Prism.Events;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BooksServices.ViewModels
@@ -51,7 +49,5 @@ namespace BooksServices.ViewModels
             _eventAggregator.GetEvent<RefreshBooksEvent>().Publish();
             return Task.CompletedTask;
         }
-
-
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BooksAppSample"
         xmlns:views="clr-namespace:BooksAppSample.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="WPF Books App Sample" Height="350" Width="525">
     <Grid>
         <TabControl>
             <TabItem Header="Books">
