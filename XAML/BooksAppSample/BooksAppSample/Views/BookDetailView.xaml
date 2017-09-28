@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="BooksAppSample.Views.BookDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BooksAppSample.Views"
+             xmlns:conv="clr-namespace:BooksAppSample.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ProgressBar Grid.ColumnSpan="2" Height="10" Margin="4" Visibility="{Binding ViewModel.SelectedItem.InProgress, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}" 
+                     IsEnabled="{Binding ViewModel.SelectedItem.InProgress, Mode=OneWay}"
+                     IsIndeterminate="True"  />
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Button Content="Edit" Command="{Binding ViewModel.SelectedItem.EditModeCommand, Mode=OneWay}" />
+            <Button Content="Cancel" Command="{Binding ViewModel.SelectedItem.CancelCommand, Mode=OneWay}" />
+            <Button Content="Save" Command="{Binding ViewModel.SelectedItem.SaveCommand, Mode=OneWay}" />
+        </StackPanel>
+        <TextBlock Grid.Row="2" Text="Title" />
+        <TextBox Grid.Row="2" Grid.Column="1" 
+                 Text="{Binding ViewModel.SelectedItem.Item.Title, Mode=TwoWay}" 
+                 IsEnabled="{Binding ViewModel.SelectedItem.IsEditMode, Mode=OneWay}" />
+
+        <TextBlock Grid.Row="3" Text="Publisher" />
+        <TextBox Grid.Row="3" Grid.Column="1" 
+                 Text="{Binding ViewModel.SelectedItem.Item.Publisher, Mode=TwoWay}" 
+                 IsEnabled="{Binding ViewModel.SelectedItem.IsEditMode, Mode=OneWay}" />
+        
+       
+    </Grid>
+</UserControl>
