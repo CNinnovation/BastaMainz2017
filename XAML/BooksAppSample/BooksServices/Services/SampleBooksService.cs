@@ -1,9 +1,7 @@
-﻿using System;
+﻿using BooksServices.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using BooksServices.Models;
 
 namespace BooksServices.Services
 {
@@ -42,7 +40,8 @@ namespace BooksServices.Services
         public Task<Book> GetBookAsync(int id) =>
             Task.FromResult(_books.SingleOrDefault(b => b.BookId == id));
 
-        public Task<IEnumerable<Book>> GetBooksAsync() => Task.FromResult<IEnumerable<Book>>(_books);
+        public Task<IEnumerable<Book>> GetBooksAsync() =>
+            Task.FromResult<IEnumerable<Book>>(_books);
 
         public Task<IEnumerable<Book>> GetBooksByPublisher(string publisher) =>
             Task.FromResult<IEnumerable<Book>>(_books.Where(b => b.Publisher == publisher));

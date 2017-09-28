@@ -1,7 +1,6 @@
 ﻿using CNElements.MVVM.Core;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Windows.Input;
 
 namespace CNElements.MVVM.ViewModels
 {

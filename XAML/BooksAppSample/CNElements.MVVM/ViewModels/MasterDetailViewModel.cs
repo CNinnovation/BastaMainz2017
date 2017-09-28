@@ -1,9 +1,6 @@
 ﻿using CNElements.MVVM.Core;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace CNElements.MVVM.ViewModels
@@ -11,12 +8,19 @@ namespace CNElements.MVVM.ViewModels
     public abstract class MasterDetailViewModel<TMasterViewModel, TItemViewModel, TItem> : ViewModel
         where TItemViewModel : IItemViewModel<TItem>
     {
-        private readonly ObservableCollection<TItemViewModel> _items = new ObservableCollection<TItemViewModel>();
-        public ObservableCollection<TItemViewModel> Items => _items;
-
         public MasterDetailViewModel()
         {
             RefreshCommand = new RelayCommand(OnRefresh);
+        }
+
+        private readonly ObservableCollection<TItemViewModel> _items = new ObservableCollection<TItemViewModel>();
+        public ObservableCollection<TItemViewModel> Items => _items;
+
+        protected TItemViewModel _selectedItem;
+        public virtual TItemViewModel SelectedItem
+        {
+            get => _selectedItem;
+            set => Set(ref _selectedItem, value);
         }
 
         protected void SetItemRange(IEnumerable<TItemViewModel> items)
@@ -49,11 +53,6 @@ namespace CNElements.MVVM.ViewModels
 
         public abstract Task LoadCoreAsync();
 
-        protected TItemViewModel _selectedItem;
-        public virtual TItemViewModel SelectedItem
-        {
-            get => _selectedItem;
-            set => Set(ref _selectedItem, value);
-        }
+
     }
 }
